@@ -27,6 +27,30 @@ function loadNames(e) {
         url += `amount=${quantity}&`;
     }
     
-    console.log(url);
+    // Connect with Ajax
+    // Instantiate XMLHTTPRequest
+    const xhr = new XMLHttpRequest();
+    // Start connection
+    xhr.open('GET', url, true);
+    // Data and print template
+    xhr.onload = function() {
+        if (this.status === 200) {
+            objectList = JSON.parse(this.responseText);
+            // Generate HTML
+            let htmlNames = '<h2>Generated names</h2>';
 
+            htmlNames += '<ul class="lista">';
+            // Print every generated name
+            objectList.forEach(function(object) {
+                htmlNames += `
+                    <li>${object.name}</li>
+                `
+            });
+            htmlNames += '</ul>';
+
+            document.getElementById('resultado').innerHTML = htmlNames;
+        }
+    }
+    // Send request
+    xhr.send();
 }
