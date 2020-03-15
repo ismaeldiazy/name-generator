@@ -29,13 +29,11 @@ function loadNames(e) {
     
     // Create Fetch
     fetch(url)
-        .then(function(res) {
-            return res.json();
-        })
-        .then(function(data) {
+        .then(res => res.json())
+        .then(data => {
             let html = `<h2>Generated Names</h2>`;
             html += `<ul class="lista">`;
-            data.forEach(function(obj) {
+            data.forEach(obj => {
                 html += `
                     <li>${obj.name}</li>
                 `;
@@ -44,7 +42,5 @@ function loadNames(e) {
             // Add created html to the DOM
             document.getElementById('resultado').innerHTML = html;
         })
-        .catch(function(error) {
-            console.log(error)
-        })
+        .catch(error => console.log(error))
 }
